@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>Thai language quiz</title>
+
+</head>
+
+<body>
+
+
+    <h1 id="kekka"></h1>
+
+    <div id="none">
+        <header class=" header">
+            <h1>タイ語クイズ</h1>
+        </header>
+
+        <main>
+
+            <p id="count">第1問</p>
+            <p id="question"></p>
+            <form action="">
+                <label for="choice00">
+                    <input type="radio" name="choices" id="choice00" value="0">
+                    <span id="choice00_label"></span>
+                </label>
+                <label for="choice01">
+                    <input type="radio" name="choices" id="choice01" value="1">
+                    <span id="choice01_label"></span>
+                </label>
+                <label for="choice02">
+                    <input type="radio" name="choices" id="choice02" value="2">
+                    <span id="choice02_label"></span>
+                </label>
+            </form>
+
+        </main>
+
+
+        <footer class="footer">
+            <h1 id="result">結果は？</h1>
+            <h1 id="seikai"></h1>
+        </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(function () {
+
+
+
+            // 問題の定義
+            const questions = [
+                '「こんにちは」はタイ語で何と言う？？',
+                '「ありがとう」はタイ語で何と言う？？',
+                '「暑い」はタイ語で何と言う？？',
+                '「日本」はタイ語で何と言う？？',
+                '「遠い」はタイ語で何と言う？？',
+                '「No」はタイ語で何と言う？？'
+            ];
+            // 選択肢の定義
+            const choices = [
+                ['サワッディーカー（สวัสดีค่ะ）', 'サバイディー（สบายดี）', 'チョークディー（โชคดีนะ）'],   //0番目
+                ['コップンカー（ขอบคุณค่ะ）', 'ヒウ（หิว）', 'コートーカー（ขอโทษค่ะ）'],   //1番目
+                ['ナウ（หนาว ）', 'ヌアイ（เหนื่อย）', 'ローン（ร้อน）'],        //2番目
+                ['ファラン（ฝรั่ง）', 'ガオリー（เกาหลี）', 'イープン（ญี่ปุ่น）'],
+                ['クライ（ใกล้）', 'クライ（ไกล）', 'クライ（ใคร）'],
+                ['マイ（ใหม่）', 'マイ（ไม่）', 'マイ（ไหม）']
+            ];
+            // console.log(choices[1][2]); →ヒウ。　１＝１番目の問題　２＝←の中の答えの２番目を表す
+
+
+
+            // 正解の定義
+            const answer = [0, 0, 2, 2, 1, 1];
+            // カウント用変数
+            let count = 0;
+            let correct = 0;
+            let seikai = 0;
+
+            const ok = '正解！！'
+            const ng = '不正解！！'
+
+
+            // 最初の問題と選択肢を表示
+            $('#question').text(questions[count]);
+            $('#choice00_label').text(choices[count][0]);  //choice：答え, count：第何回目の質問かを表す, ←の質問の中の0番目を表示
+            $('#choice01_label').text(choices[count][1]);
+            $('#choice02_label').text(choices[count][2]);
+
+
+            // クリック時に正誤判定&次の問題の内容を表示
+            $('input[name="choices"]').on('click', function () {
+                var selected = $(this).val();
+                if (selected == answer[count]) {
+                    $('#result').text(ok);
+                    correct++;
+                    seikai++;
+                } else {
+                    $('#result').text(ng);
+                }
+                count++;
+                if (count < questions.length) {
+                    // 次の問題を表示
+                    $('#count').text('第' + ((count) + 1) + '問');
+                    $('#question').text(questions[count]);
+                    $('#choice00_label').text(choices[count][0]);
+                    $('#choice01_label').text(choices[count][1]);
+                    $('#choice02_label').text(choices[count][2]);
+                    $('#seikai').text(seikai + '問正解');
+                } else {
+                    if (correct == 6) {
+                        $('#none').fadeOut(2000, function () {
+                            $('h1').text(correct + '問、全問正解👏👏タイ語マスター🇹🇭').addClass('ue');
+                        });
+                    } else if (correct >= 4 && correct <= 5) {
+                        $('#none').fadeOut(2000, function () {
+                            $('h1').text(correct + '問正解！！上級レベル👍').addClass('ue');
+                        });
+                    } else if (correct >= 3 && correct <= 4) {
+                        $('#none').fadeOut(2000, function () {
+                            $('h1').text(correct + '問正解！！中級レベル😊').addClass('ue');
+                        });
+                    } else {
+                        $('#none').fadeOut(2000, function () {
+                            $('h1').text(correct + '問正解！！もう少し勉強しましょう😭').addClass('ue');
+                        });
+                    }
+
+
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

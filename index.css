@@ -1,0 +1,61 @@
+.header, .footer {
+    width: 100%;
+    /* background: navy; */
+    color: whitesmoke;
+    /* border: 1px solod #000; */
+    /* box-sizing: border-box; */
+    text-align: center;
+}
+
+main {
+    font-size: 30px;
+    text-align: center;
+}           
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    margin:0 auto;
+    background-image: url(thai2.jpg);
+    background-size: cover;
+    object-fit: cover;
+}
+
+/* .bg-image{
+    background: rgba(255,255,255,0.7);
+} */
+.header h1{
+    font-size: 40px;
+    animation: blinkAnime 1s infinite alternate;
+}
+@keyframes blinkAnime{
+   0% { color: #0000b3 }
+ 100% { color: #ffffff }
+}
+
+#count{
+    color:red;
+}
+
+
+h1{
+	text-align: center;
+}
+
+label:hover{
+    cursor: pointer;
+    content:"サンプル";
+}
+
+.ue{
+	font-size: 50px;
+	padding-top:180px;
+}
+
+.none{
+	display: none;
+}
+
